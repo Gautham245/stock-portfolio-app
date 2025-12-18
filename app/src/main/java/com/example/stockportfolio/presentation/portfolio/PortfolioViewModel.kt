@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.stockportfolio.domain.usecase.CalculatePortfolioSummaryUseCase
 import com.example.stockportfolio.domain.usecase.GetHoldingsUseCase
 import com.example.stockportfolio.presentation.portfolio.state.PortfolioUiState
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
 
 class PortfolioViewModel(
@@ -28,7 +30,8 @@ class PortfolioViewModel(
     fun loadHoldings() {
         _uiState.update { it.copy(isLoading = true, errorMessage = null) }
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+
             getHoldingsUseCase()
                 .collect { result ->
 
