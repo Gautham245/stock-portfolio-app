@@ -1,6 +1,7 @@
 package com.example.stockportfolio
 
 import android.app.Application
+import com.example.stockportfolio.di.databaseModule
 import com.example.stockportfolio.di.networkModule
 import com.example.stockportfolio.di.repositoryModule
 import com.example.stockportfolio.di.useCaseModule
@@ -16,6 +17,7 @@ class PortfolioApp : Application() {
             androidContext(this@PortfolioApp)
             modules(
                 networkModule,
+                databaseModule,
                 repositoryModule,
                 useCaseModule,
                 viewModelModule

@@ -5,5 +5,5 @@ import com.example.stockportfolio.domain.repository.HoldingsRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<HoldingsRepository> { HoldingsRepositoryImpl(get()) }
+    single<HoldingsRepository> { HoldingsRepositoryImpl(get(), get()) }
 }

@@ -31,9 +31,11 @@ class PortfolioViewModel(
         viewModelScope.launch {
             getHoldingsUseCase()
                 .collect { result ->
+
                     result
                         .onSuccess { holdings ->
                             val summary = calculateSummaryUseCase(holdings)
+
                             _uiState.update {
                                 it.copy(
                                     isLoading = false,
@@ -47,7 +49,7 @@ class PortfolioViewModel(
                             _uiState.update {
                                 it.copy(
                                     isLoading = false,
-                                    errorMessage = error.localizedMessage ?: "Unknown error"
+                                    errorMessage = error.message
                                 )
                             }
                         }

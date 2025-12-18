@@ -10,12 +10,8 @@ import kotlinx.coroutines.flow.flowOn
 class GetHoldingsUseCase(
     private val repository: HoldingsRepository
 ) {
-    operator fun invoke(): Flow<Result<List<Holding>>> = flow {
-        try {
-            val data = repository.getHoldings()
-            emit(Result.success(data))
-        } catch (e: Exception) {
-            emit(Result.failure(e))
-        }
-    }.flowOn(Dispatchers.IO)
+    operator fun invoke(): Flow<Result<List<Holding>>> {
+        return repository.getHoldings()
+    }
 }
+
